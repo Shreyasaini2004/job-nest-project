@@ -61,7 +61,11 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				'job-primary': 'hsl(var(--job-primary))',
+				'job-secondary': 'hsl(var(--job-secondary))',
+				'job-success': 'hsl(var(--job-success))',
+				'job-accent': 'hsl(var(--job-accent))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

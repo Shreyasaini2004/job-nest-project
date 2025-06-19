@@ -51,6 +51,12 @@
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* JobNest Theme Colors */
+    --job-primary: 219 70% 65%;
+    --job-secondary: 220 15% 95%;
+    --job-success: 142 69% 58%;
+    --job-accent: 268 83% 70%;
   }
 
   .dark {
