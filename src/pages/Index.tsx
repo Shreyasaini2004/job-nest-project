@@ -8,9 +8,9 @@ import Footer from "@/components/Footer";
 import RoleSelector from "@/components/RoleSelector";
 
 const Index = () => {
-  const [userRole, setUserRole] = useState<'job-seeker' | 'employee' | 'admin' | null>(null);
+  const [userRole, setUserRole] = useState<'job-seeker' | 'employee' | null>(null);
 
-  const handleRoleSelect = (role: 'job-seeker' | 'employee' | 'admin') => {
+  const handleRoleSelect = (role: 'job-seeker' | 'employee') => {
     setUserRole(role);
   };
 
@@ -29,14 +29,6 @@ const Index = () => {
           </>
         );
       case 'employee':
-        return (
-          <>
-            <HeroSection />
-            <JobCategories />
-            <FeaturedJobs />
-          </>
-        );
-      case 'admin':
         return (
           <>
             <HeroSection />
