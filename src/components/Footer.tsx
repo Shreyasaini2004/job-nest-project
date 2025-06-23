@@ -39,8 +39,8 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">For Job Seekers</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-job-primary transition-colors">Browse Jobs</a></li>
-              <li><a href="#" className="hover:text-job-primary transition-colors">Resume ATS Score Calculator</a></li>
+              <li>Browse Jobs</li>
+              <li>Resume ATS Score Calculator</li>
             </ul>
           </div>
 
@@ -48,10 +48,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">For Employers</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-job-primary transition-colors">Post a Job</a></li>
-              <li><a href="#" className="hover:text-job-primary transition-colors">Browse Candidates</a></li>
-              <li><a href="#" className="hover:text-job-primary transition-colors">Hiring Solutions</a></li>
-              <li><a href="#" className="hover:text-job-primary transition-colors">Company Profiles</a></li>
+              <li>Post Jobs</li>
+              <li>Browse Candidates</li>
+              <li>Hiring Solutions</li>
+              <li>Company Profiles</li>
             </ul>
           </div>
         </div>

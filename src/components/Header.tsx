@@ -17,7 +17,6 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-6">
             <a href="#" className="text-foreground hover:text-job-primary transition-colors">Jobs</a>
             <a href="#" className="text-foreground hover:text-job-primary transition-colors">Companies</a>
-            <a href="#" className="text-foreground hover:text-job-primary transition-colors">Resources</a>
           </nav>
         </div>
 
@@ -29,10 +28,6 @@ const Header = () => {
           <Button variant="outline" className="hidden md:flex">
             <User className="h-4 w-4 mr-2" />
             Sign In
-          </Button>
-          
-          <Button className="hidden md:flex bg-job-success hover:bg-job-success/90">
-            Post Job
           </Button>
 
           <Button variant="ghost" size="icon" className="md:hidden">

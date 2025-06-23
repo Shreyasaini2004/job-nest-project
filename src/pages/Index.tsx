@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import JobCategories from "@/components/JobCategories";
 import FeaturedJobs from "@/components/FeaturedJobs";
+import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 import RoleSelector from "@/components/RoleSelector";
 
@@ -16,7 +17,12 @@ const Index = () => {
 
   const renderContent = () => {
     if (!userRole) {
-      return <RoleSelector onRoleSelect={handleRoleSelect} />;
+      return (
+        <>
+          <RoleSelector onRoleSelect={handleRoleSelect} />
+          <AboutSection />
+        </>
+      );
     }
 
     switch (userRole) {
@@ -37,7 +43,12 @@ const Index = () => {
           </>
         );
       default:
-        return <RoleSelector onRoleSelect={handleRoleSelect} />;
+        return (
+          <>
+            <RoleSelector onRoleSelect={handleRoleSelect} />
+            <AboutSection />
+          </>
+        );
     }
   };
 
