@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Search, Bell, User, Menu } from "lucide-react";
 
@@ -16,7 +17,6 @@ const Header = () => {
           <nav className="hidden md:flex items-center space-x-6">
             <a href="#" className="text-foreground hover:text-job-primary transition-colors">Jobs</a>
             <a href="#" className="text-foreground hover:text-job-primary transition-colors">Companies</a>
-            <a href="#" className="text-foreground hover:text-job-primary transition-colors">Salaries</a>
             <a href="#" className="text-foreground hover:text-job-primary transition-colors">Resources</a>
           </nav>
         </div>
