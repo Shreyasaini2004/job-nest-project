@@ -46,12 +46,10 @@ const AboutSection = () => {
             ?
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            JobNest is an intelligent, full-stack job portal application designed to seamlessly connect job seekers with employers. 
-            Built with modern technology, it offers a robust, scalable, and interactive platform for modern recruitment needs.
+            Whether you're a job seeker searching for your next big opportunity or an employer looking to hire top talent, JobNest bridges the gap with powerful, modern tools.
           </p>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto mt-4 leading-relaxed">
-            The platform enables personalized job matching, company branding, resume parsing, and real-time messaging 
-            between candidates and recruiters—providing a comprehensive employment ecosystem.
+          <p className="text-base text-bold md:text-lg text-muted-foreground max-w-3xl mx-auto mt-4 leading-relaxed">
+            Discover smarter hiring. Experience effortless job searching. Welcome to JobNest.
           </p>
         </div>
 
