@@ -10,6 +10,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Eye, EyeOff } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "@/contexts/UserContext";
 
 const loginSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
@@ -22,6 +23,7 @@ export function JobSeekerLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const { toast } = useToast();
+  const { setUser } = useUser();
   const navigate = useNavigate();
   
   const {
@@ -35,21 +37,30 @@ export function JobSeekerLogin() {
   const onSubmit = async (data: LoginFormValues) => {
     setIsLoading(true);
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Create a basic user object with the provided email
+      const user = {
+        id: Date.now().toString(),
+        name: data.email.split('@')[0], // Use the part before @ as the username
+        email: data.email,
+        userType: 'job-seeker' as const, // Explicitly type as literal 'job-seeker'
+        createdAt: new Date().toISOString(),
+      };
       
-      // On successful login
+      // Set user in context
+      setUser(user);
+      
       toast({
-        title: "Welcome back!",
-        description: "You have successfully logged in.",
+        title: "Welcome!",
+        description: `Welcome, ${user.name}!`,
       });
       
-      // Redirect to dashboard
+      // Redirect to job seeker dashboard
       navigate('/job-seeker-dashboard');
     } catch (error) {
+      console.error('Login error:', error);
       toast({
-        title: "Login failed",
-        description: "Please check your credentials and try again.",
+        title: "Login Error",
+        description: "An error occurred during login. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -76,6 +87,7 @@ export function JobSeekerLogin() {
                 type="email"
                 placeholder="you@example.com"
                 className="h-12 px-4 text-base border-border/50 focus-visible:ring-2 focus-visible:ring-job-primary/50"
+                disabled={isLoading}
                 {...register('email')}
               />
               {errors.email && (
@@ -99,6 +111,7 @@ export function JobSeekerLogin() {
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
                 className="h-12 px-4 text-base border-border/50 focus-visible:ring-2 focus-visible:ring-job-primary/50 pr-12"
+                disabled={isLoading}
                 {...register('password')}
               />
               <button

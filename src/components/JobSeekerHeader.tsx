@@ -1,12 +1,15 @@
-
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { User, Settings, LogOut, Eye } from "lucide-react";
+import { useUser } from "@/contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const JobSeekerHeader = () => {
+  const { user, logout } = useUser();
+  const navigate = useNavigate();
   const currentStatus = "Pending"; // This would come from user data
-  const userName = "John Doe"; // This would come from user data
+  const userName = user?.name || "User";
 
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -19,6 +22,11 @@ const JobSeekerHeader = () => {
       default:
         return 'bg-gray-500 text-white';
     }
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
   };
 
   return (
@@ -55,7 +63,7 @@ const JobSeekerHeader = () => {
                 <span>Settings</span>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-red-50 text-red-600">
+              <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-red-50 text-red-600" onClick={handleLogout}>
                 <LogOut className="h-4 w-4" />
                 <span>Logout</span>
               </DropdownMenuItem>
