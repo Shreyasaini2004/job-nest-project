@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { SidebarProvider } from "@/components/ui/sidebar";
 import JobSeekerSidebar from "@/components/JobSeekerSidebar";
-import JobSeekerContent from "@/components/JobSeekerContent";
+import JobSeekerContent from "@/components/JobSeekerContents";
 import JobSeekerHeader from "@/components/JobSeekerHeader";
 
 const JobSeekerDashboard = () => {
