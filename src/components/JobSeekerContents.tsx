@@ -1,4 +1,4 @@
-mport UpdateDetailsForm from "@/components/UpdateDetailsForm";
+import UpdateDetailsForm from "@/components/UpdateDetailsForm";
 import ViewOpenings from "@/components/ViewOpenings";
 import ManageApplications from "@/components/ManageApplications";
 
