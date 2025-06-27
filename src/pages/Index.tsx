@@ -15,8 +15,9 @@ const Index = () => {
   const handleRoleSelect = (role: 'job-seeker' | 'employee') => {
     setUserRole(role);
     if (role === 'job-seeker') {
-      navigate('/job-seeker-dashboard');
+      navigate('/login');
     }
+    // Handle employee role if needed
   };
 
   const renderContent = () => {
@@ -29,31 +30,15 @@ const Index = () => {
       );
     }
 
-    switch (userRole) {
-      case 'job-seeker':
-        return (
-          <>
-            <HeroSection />
-            <JobCategories />
-            <FeaturedJobs />
-          </>
-        );
-      case 'employee':
-        return (
-          <>
-            <HeroSection />
-            <JobCategories />
-            <FeaturedJobs />
-          </>
-        );
-      default:
-        return (
-          <>
-            <RoleSelector onRoleSelect={handleRoleSelect} />
-            <AboutSection />
-          </>
-        );
-    }
+
+    // This part will only be reached if the user selects 'employee' role
+    return (
+      <>
+        <HeroSection />
+        <JobCategories />
+        <FeaturedJobs />
+      </>
+    );
   };
 
   return (
