@@ -1,5 +1,5 @@
-
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import JobCategories from "@/components/JobCategories";
@@ -10,9 +10,13 @@ import RoleSelector from "@/components/RoleSelector";
 
 const Index = () => {
   const [userRole, setUserRole] = useState<'job-seeker' | 'employee' | null>(null);
+  const navigate = useNavigate();
 
   const handleRoleSelect = (role: 'job-seeker' | 'employee') => {
     setUserRole(role);
+    if (role === 'job-seeker') {
+      navigate('/job-seeker-dashboard');
+    }
   };
 
   const renderContent = () => {
