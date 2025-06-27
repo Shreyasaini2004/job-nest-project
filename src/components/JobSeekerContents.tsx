@@ -1,69 +1,30 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Header from "@/components/Header";
-import HeroSection from "@/components/HeroSection";
-import JobCategories from "@/components/JobCategories";
-import FeaturedJobs from "@/components/FeaturedJobs";
-import AboutSection from "@/components/AboutSection";
-import Footer from "@/components/Footer";
-import RoleSelector from "@/components/RoleSelector";
+mport UpdateDetailsForm from "@/components/UpdateDetailsForm";
+import ViewOpenings from "@/components/ViewOpenings";
+import ManageApplications from "@/components/ManageApplications";
 
-const Index = () => {
-  const [userRole, setUserRole] = useState<'job-seeker' | 'employee' | null>(null);
-  const navigate = useNavigate();
+interface JobSeekerContentProps {
+  activeSection: 'update-details' | 'view-openings' | 'manage-applications';
+}
 
-  const handleRoleSelect = (role: 'job-seeker' | 'employee') => {
-    setUserRole(role);
-    
-    if (role === 'job-seeker') {
-      navigate('/job-seeker-dashboard');
-    }
-  };
-
+const JobSeekerContent = ({ activeSection }: JobSeekerContentProps) => {
   const renderContent = () => {
-    if (!userRole) {
-      return (
-        <>
-          <RoleSelector onRoleSelect={handleRoleSelect} />
-          <AboutSection />
-        </>
-      );
-    }
-
-    switch (userRole) {
-      case 'job-seeker':
-        return (
-          <>
-            <HeroSection />
-            <JobCategories />
-            <FeaturedJobs />
-          </>
-        );
-      case 'employee':
-        return (
-          <>
-            <HeroSection />
-            <JobCategories />
-            <FeaturedJobs />
-          </>
-        );
+    switch (activeSection) {
+      case 'update-details':
+        return <UpdateDetailsForm />;
+      case 'view-openings':
+        return <ViewOpenings />;
+      case 'manage-applications':
+        return <ManageApplications />;
       default:
-        return (
-          <>
-            <RoleSelector onRoleSelect={handleRoleSelect} />
-            <AboutSection />
-          </>
-        );
+        return <UpdateDetailsForm />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <main className="flex-1 p-6 bg-background">
       {renderContent()}
-      <Footer />
-    </div>
+    </main>
   );
 };
 
-export default Index;
+export default JobSeekerContent;
