@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Badge } from "@/components/ui/badge";
 import { User, Settings, LogOut, Eye } from "lucide-react";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useUser } from "@/contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +33,8 @@ const JobSeekerHeader = () => {
   return (
     <header className="w-full bg-gradient-to-r from-background via-job-secondary/20 to-background border-b border-border/50 p-6 shadow-sm">
       <div className="flex justify-between items-center">
-        <div className="flex items-center space-x-6">
+        <div className="flex items-center space-x-4">
+          <SidebarTrigger className="hover:bg-job-primary/10 p-2 rounded-lg transition-colors" />
           <div>
             <h1 className="text-3xl font-bold text-foreground mb-1">
               Welcome back, {userName}!
@@ -42,7 +44,6 @@ const JobSeekerHeader = () => {
             </p>
           </div>
         </div>
-        
         <div className="flex items-center space-x-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

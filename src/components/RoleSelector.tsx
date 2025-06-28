@@ -12,9 +12,9 @@ const RoleSelector = () => {
 
   const handleRoleSelect = (role: 'job-seeker' | 'employer') => {
     if (role === 'job-seeker') {
-      navigate('/dashboard');
+      navigate('/login');
     } else {
-      navigate('/employer-dashboard');
+      navigate('/login?tab=employer');
     }
   };
 

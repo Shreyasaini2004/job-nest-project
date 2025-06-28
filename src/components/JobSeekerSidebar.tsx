@@ -1,16 +1,14 @@
-import { User, Briefcase, FileText, ChevronLeft, ChevronRight } from "lucide-react";
+import { User, Briefcase, FileText } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 
 interface JobSeekerSidebarProps {
   activeSection: 'update-details' | 'view-openings' | 'manage-applications';
@@ -18,71 +16,47 @@ interface JobSeekerSidebarProps {
 }
 
 const JobSeekerSidebar = ({ activeSection, onSectionChange }: JobSeekerSidebarProps) => {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const { state } = useSidebar();
+  const isCollapsed = state === "collapsed";
 
   const menuItems = [
     {
-      title: "Update User Details",
-      key: "update-details" as const,
-      icon: User,
-      color: "text-blue-600 hover:bg-blue-50",
-      activeColor: "bg-blue-100 text-blue-700 border-blue-200"
+      id: 'update-details' as const,
+      label: 'Update User Details',
+      icon: User
     },
     {
-      title: "View Openings",
-      key: "view-openings" as const,
-      icon: Briefcase,
-      color: "text-green-600 hover:bg-green-50",
-      activeColor: "bg-green-100 text-green-700 border-green-200"
+      id: 'view-openings' as const,
+      label: 'View Openings',
+      icon: Briefcase
     },
     {
-      title: "Manage Applications",
-      key: "manage-applications" as const,
-      icon: FileText,
-      color: "text-purple-600 hover:bg-purple-50",
-      activeColor: "bg-purple-100 text-purple-700 border-purple-200"
+      id: 'manage-applications' as const,
+      label: 'Manage Applications',
+      icon: FileText
     },
   ];
 
   return (
-    <Sidebar className={`border-r border-border transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-64'}`}>
+    <Sidebar className="border-r border-slate-200 bg-white shadow-lg">
       <SidebarContent>
         <SidebarGroup>
-          <div className="flex items-center justify-between px-2 mb-4">
-            {!isCollapsed && (
-              <SidebarGroupLabel className="text-lg font-semibold">
-                Job Seeker Dashboard
-              </SidebarGroupLabel>
-            )}
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsCollapsed(!isCollapsed)}
-              className="h-8 w-8 hover:bg-gray-100"
-            >
-              {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
-            </Button>
-          </div>
           <SidebarGroupContent>
-            <SidebarMenu className="space-y-3">
+            <SidebarMenu className="space-y-3 p-3">
               {menuItems.map((item) => (
-                <SidebarMenuItem key={item.key}>
+                <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton
-                    onClick={() => onSectionChange(item.key)}
-                    isActive={activeSection === item.key}
-                    className={`
-                      w-full justify-start py-3 px-4 rounded-lg transition-all duration-200
-                      ${activeSection === item.key 
-                        ? `${item.activeColor} border-l-4 font-medium shadow-sm` 
-                        : `${item.color} hover:shadow-sm border-l-4 border-transparent`
-                      }
-                      ${isCollapsed ? 'justify-center px-2' : ''}
-                    `}
-                    title={isCollapsed ? item.title : undefined}
+                    onClick={() => onSectionChange(item.id)}
+                    isActive={activeSection === item.id}
+                    className={`w-full py-4 px-4 rounded-lg transition-all duration-200 min-h-[56px] ${
+                      activeSection === item.id
+                        ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
+                        : 'hover:bg-slate-50 text-slate-700 hover:text-slate-900'
+                    }`}
                   >
-                    <item.icon className={`h-5 w-5 ${!isCollapsed ? 'mr-3' : ''}`} />
+                    <item.icon className={`h-5 w-5 ${isCollapsed ? 'mx-auto' : 'mr-3'} flex-shrink-0`} />
                     {!isCollapsed && (
-                      <span className="text-sm font-medium">{item.title}</span>
+                      <span className="font-medium text-sm leading-relaxed">{item.label}</span>
                     )}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
