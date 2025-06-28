@@ -1,13 +1,23 @@
-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { User, Briefcase } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface RoleSelectorProps {
   onRoleSelect: (role: 'job-seeker' | 'employee') => void;
 }
 
-const RoleSelector = ({ onRoleSelect }: RoleSelectorProps) => {
+const RoleSelector = () => {
+  const navigate = useNavigate();
+
+  const handleRoleSelect = (role: 'job-seeker' | 'employer') => {
+    if (role === 'job-seeker') {
+      navigate('/dashboard');
+    } else {
+      navigate('/employer-dashboard');
+    }
+  };
+
   return (
     <section className="py-20 bg-gradient-to-br from-job-secondary via-background to-job-secondary">
       <div className="container mx-auto px-4 text-center">
@@ -20,7 +30,7 @@ const RoleSelector = ({ onRoleSelect }: RoleSelectorProps) => {
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-          <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-1" onClick={() => onRoleSelect('job-seeker')}>
+          <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-1" onClick={() => handleRoleSelect('job-seeker')}>
             <CardContent className="p-8 text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <User className="h-8 w-8 text-white" />
@@ -37,7 +47,7 @@ const RoleSelector = ({ onRoleSelect }: RoleSelectorProps) => {
             </CardContent>
           </Card>
 
-          <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-1" onClick={() => onRoleSelect('employee')}>
+          <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-1" onClick={() => handleRoleSelect('employer')}>
             <CardContent className="p-8 text-center">
               <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                 <Briefcase className="h-8 w-8 text-white" />
