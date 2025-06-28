@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -31,9 +30,8 @@ const PostOpening = () => {
 
   return (
     <div className="max-w-4xl mx-auto space-y-6">
-      <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-white">
-        <h1 className="text-3xl font-bold mb-2">Post New Opening</h1>
-        <p className="text-blue-100">Create attractive job postings to find the best talent for your company</p>
+      <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-6 text-white text-center">
+        <h1 className="text-3xl font-bold">Post Opening</h1>
       </div>
 
       <Card className="shadow-lg border-0">

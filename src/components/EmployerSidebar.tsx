@@ -15,20 +15,17 @@ const EmployerSidebar = ({ activeSection, onSectionChange }: EmployerSidebarProp
     {
       id: 'post-opening' as const,
       label: 'Post Opening',
-      icon: PlusCircle,
-      description: 'Create new job postings'
+      icon: PlusCircle
     },
     {
       id: 'view-applications' as const,
       label: 'View Applications',
-      icon: Users,
-      description: 'Review candidate applications'
+      icon: Users
     },
     {
       id: 'view-status' as const,
       label: 'View Status',
-      icon: BarChart3,
-      description: 'Track application status'
+      icon: BarChart3
     }
   ];
 
@@ -37,24 +34,21 @@ const EmployerSidebar = ({ activeSection, onSectionChange }: EmployerSidebarProp
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu className="space-y-2 p-2">
+            <SidebarMenu className="space-y-3 p-3">
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton
                     onClick={() => onSectionChange(item.id)}
                     isActive={activeSection === item.id}
-                    className={`w-full p-3 rounded-lg transition-all duration-200 ${
+                    className={`w-full py-4 px-4 rounded-lg transition-all duration-200 min-h-[56px] ${
                       activeSection === item.id
                         ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
-                        : 'hover:bg-slate-100 text-slate-700 hover:text-slate-900'
+                        : 'hover:bg-slate-50 text-slate-700 hover:text-slate-900'
                     }`}
                   >
-                    <item.icon className={`h-5 w-5 ${isCollapsed ? 'mx-auto' : 'mr-3'}`} />
+                    <item.icon className={`h-5 w-5 ${isCollapsed ? 'mx-auto' : 'mr-3'} flex-shrink-0`} />
                     {!isCollapsed && (
-                      <div className="flex flex-col items-start">
-                        <span className="font-medium">{item.label}</span>
-                        <span className="text-xs opacity-80">{item.description}</span>
-                      </div>
+                      <span className="font-medium text-sm leading-relaxed">{item.label}</span>
                     )}
                   </SidebarMenuButton>
                 </SidebarMenuItem>

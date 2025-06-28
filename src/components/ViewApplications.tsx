@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -85,9 +84,8 @@ const ViewApplications = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-gradient-to-r from-purple-500 to-blue-600 rounded-xl p-6 text-white">
-        <h1 className="text-3xl font-bold mb-2">View Applications</h1>
-        <p className="text-purple-100">Review and manage candidate applications for your job postings</p>
+      <div className="bg-gradient-to-r from-purple-500 to-blue-600 rounded-xl p-6 text-white text-center">
+        <h1 className="text-3xl font-bold">View Applications</h1>
       </div>
 
       {/* Search and Filter Section */}

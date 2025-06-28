@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -81,9 +80,8 @@ const ViewStatus = () => {
 
   return (
     <div className="space-y-6">
-      <div className="bg-gradient-to-r from-green-500 to-blue-600 rounded-xl p-6 text-white">
-        <h1 className="text-3xl font-bold mb-2">View Status</h1>
-        <p className="text-green-100">Track the progress of all your job postings and candidate applications</p>
+      <div className="bg-gradient-to-r from-green-500 to-blue-600 rounded-xl p-6 text-white text-center">
+        <h1 className="text-3xl font-bold">View Status</h1>
       </div>
 
       {/* Overview Stats */}
