@@ -6,6 +6,7 @@ import FeaturedJobs from "@/components/FeaturedJobs";
 import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 import RoleSelector from "@/components/RoleSelector";
+import EventsBulletin from "@/components/EventsBulletin";
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
       <main>
         <HeroSection />
         <RoleSelector />
+        <EventsBulletin />
         <JobCategories />
         <FeaturedJobs />
         <AboutSection />

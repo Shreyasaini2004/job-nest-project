@@ -1,10 +1,10 @@
 
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, useSidebar } from "@/components/ui/sidebar";
-import { PlusCircle, Users, BarChart3 } from "lucide-react";
+import { PlusCircle, Users, BarChart3, Calendar } from "lucide-react";
 
 interface EmployerSidebarProps {
-  activeSection: 'post-opening' | 'view-applications' | 'view-status';
-  onSectionChange: (section: 'post-opening' | 'view-applications' | 'view-status') => void;
+  activeSection: 'post-opening' | 'view-applications' | 'view-status' | 'calendar-events';
+  onSectionChange: (section: 'post-opening' | 'view-applications' | 'view-status' | 'calendar-events') => void;
 }
 
 const EmployerSidebar = ({ activeSection, onSectionChange }: EmployerSidebarProps) => {
@@ -26,6 +26,11 @@ const EmployerSidebar = ({ activeSection, onSectionChange }: EmployerSidebarProp
       id: 'view-status' as const,
       label: 'View Status',
       icon: BarChart3
+    },
+    {
+      id: 'calendar-events' as const,
+      label: 'Calendar & Events',
+      icon: Calendar
     }
   ];
 

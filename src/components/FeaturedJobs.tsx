@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 const FeaturedJobs = () => {
   const featuredJobs = [
     {
+      id: "job1",
       title: "Senior React Developer",
       company: "TechCorp Inc.",
       location: "San Francisco, CA",
@@ -16,6 +17,7 @@ const FeaturedJobs = () => {
       featured: true
     },
     {
+      id: "job2",
       title: "Product Manager",
       company: "StartupXYZ",
       location: "Remote",
@@ -27,6 +29,7 @@ const FeaturedJobs = () => {
       featured: true
     },
     {
+      id: "job3",
       title: "UX/UI Designer",
       company: "DesignStudio",
       location: "New York, NY",
@@ -38,6 +41,7 @@ const FeaturedJobs = () => {
       featured: true
     },
     {
+      id: "job4",
       title: "Data Scientist",
       company: "DataCorp",
       location: "Seattle, WA",
@@ -49,6 +53,7 @@ const FeaturedJobs = () => {
       featured: true
     },
     {
+      id: "job5",
       title: "DevOps Engineer",
       company: "CloudTech",
       location: "Austin, TX",
@@ -60,6 +65,7 @@ const FeaturedJobs = () => {
       featured: true
     },
     {
+      id: "job6",
       title: "Marketing Manager",
       company: "GrowthCo",
       location: "Los Angeles, CA",
@@ -94,6 +100,7 @@ const FeaturedJobs = () => {
           {featuredJobs.map((job, index) => (
             <JobCard
               key={index}
+              id={job.id}
               title={job.title}
               company={job.company}
               location={job.location}

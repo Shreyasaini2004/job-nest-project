@@ -1,9 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, DollarSign, Clock, Bookmark } from "lucide-react";
+import { MapPin, DollarSign, Clock, Bookmark, BookmarkCheck } from "lucide-react";
+import { useSavedJobs } from "@/contexts/SavedJobsContext";
+import { useState } from "react";
 
 interface JobCardProps {
+  id: string;
   title: string;
   company: string;
   location: string;
@@ -16,6 +19,7 @@ interface JobCardProps {
 }
 
 const JobCard = ({ 
+  id,
   title, 
   company, 
   location, 
@@ -26,6 +30,29 @@ const JobCard = ({
   skills, 
   featured = false 
 }: JobCardProps) => {
+  const { saveJob, removeJob, isJobSaved } = useSavedJobs();
+  const [saved, setSaved] = useState(isJobSaved(id));
+
+  const handleBookmark = () => {
+    if (saved) {
+      removeJob(id);
+      setSaved(false);
+    } else {
+      saveJob({
+        id,
+        title,
+        company,
+        location,
+        salary,
+        type,
+        posted,
+        description,
+        skills,
+        featured
+      });
+      setSaved(true);
+    }
+  };
   return (
     <Card className={`group hover:shadow-lg transition-all duration-300 cursor-pointer ${featured ? 'border-job-primary bg-gradient-to-r from-job-secondary/30 to-background' : ''}`}>
       <CardContent className="p-6">
@@ -41,8 +68,13 @@ const JobCard = ({
             </div>
             <p className="text-muted-foreground font-medium">{company}</p>
           </div>
-          <Button variant="ghost" size="icon" className="shrink-0">
-            <Bookmark className="h-4 w-4" />
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className={`shrink-0 ${saved ? 'text-job-primary' : ''}`}
+            onClick={handleBookmark}
+          >
+            {saved ? <BookmarkCheck className="h-4 w-4" /> : <Bookmark className="h-4 w-4" />}
           </Button>
         </div>
 

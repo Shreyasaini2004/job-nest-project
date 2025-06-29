@@ -1,9 +1,10 @@
 import UpdateDetailsForm from "@/components/UpdateDetailsForm";
 import ViewOpenings from "@/components/ViewOpenings";
 import ManageApplications from "@/components/ManageApplications";
+import SavedJobs from "@/components/SavedJobs";
 
 interface JobSeekerContentProps {
-  activeSection: 'update-details' | 'view-openings' | 'manage-applications';
+  activeSection: 'update-details' | 'view-openings' | 'manage-applications' | 'saved-jobs';
 }
 
 const JobSeekerContent = ({ activeSection }: JobSeekerContentProps) => {
@@ -13,6 +14,8 @@ const JobSeekerContent = ({ activeSection }: JobSeekerContentProps) => {
         return <UpdateDetailsForm />;
       case 'view-openings':
         return <ViewOpenings />;
+      case 'saved-jobs':
+        return <SavedJobs />;
       case 'manage-applications':
         return <ManageApplications />;
       default:
