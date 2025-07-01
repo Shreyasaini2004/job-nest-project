@@ -72,7 +72,7 @@ export default function LoginPage() {
           <div className="px-8 pb-8 text-center">
             <p className="text-sm text-muted-foreground">
               Don't have an account?{' '}
-              <Link to="/register" className="font-medium text-job-primary hover:underline">
+              <Link to={`/register?type=${tab}`} className="font-medium text-job-primary hover:underline">
                 Sign up now
               </Link>
             </p>
