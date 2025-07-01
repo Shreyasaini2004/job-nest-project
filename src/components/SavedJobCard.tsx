@@ -11,7 +11,7 @@ import { Job } from "@/contexts/SavedJobsContext";
 interface SavedJobCardProps {
   job: Job;
   removeJob: (id: string) => void;
-  toggleReminder: (id: string, deadline?: Date) => void;
+  toggleReminder: (jobId: string, deadline?: Date) => void;
 }
 
 const SavedJobCard = ({ job, removeJob, toggleReminder }: SavedJobCardProps) => {
@@ -19,7 +19,9 @@ const SavedJobCard = ({ job, removeJob, toggleReminder }: SavedJobCardProps) => 
   const [isReminderPopoverOpen, setIsReminderPopoverOpen] = useState(false);
 
   const handleSetReminder = () => {
-    toggleReminder(job.id, selectedDeadline);
+    if (selectedDeadline) {
+      toggleReminder(job.id, selectedDeadline);
+    }
     setIsReminderPopoverOpen(false);
     setSelectedDeadline(undefined);
   };

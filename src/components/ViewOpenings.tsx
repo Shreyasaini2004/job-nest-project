@@ -1,117 +1,144 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Filter, Loader2 } from "lucide-react";
 import { Job } from "@/contexts/SavedJobsContext";
 import JobSearchFilters from "./JobSearchFilters";
 import JobListingCard from "./JobListingCard";
 import NoJobsFound from "./NoJobsFound";
 import ErrorBoundary from "./ErrorBoundary";
-import { useJobs } from "@/lib/jobs-api";
 import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
 import { Button } from "./ui/button";
 import { AlertCircle } from "lucide-react";
-
-// Define a proper interface for job data
-interface JobOpening extends Omit<Job, 'posted'> {
-  postedDate: string;
-}
-
-// Helper function to convert JobOpening to Job (for legacy data format)
-const convertToJob = (job: JobOpening): Job => ({
-  id: job.id,
-  title: job.title,
-  company: job.company,
-  location: job.location,
-  type: job.type,
-  salary: job.salary,
-  posted: job.postedDate,
-  description: job.description,
-  skills: job.skills || [],
-});
 
 const ViewOpenings = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [filterLocation, setFilterLocation] = useState("all");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // Use React Query to fetch jobs
-  const { data: jobs, isLoading, isError, error, refetch } = useJobs({
-    searchTerm,
-    jobType: filterType,
-    location: filterLocation,
-  });
-  
-  // Legacy job data - only used as fallback if API is not available
-  const legacyJobOpenings: JobOpening[] = [
+  // Mock job data
+  const mockJobs: Job[] = [
     {
-      id: "job-1",
-      title: "Frontend Developer",
-      company: "Tech Corp",
-      location: "New York, NY",
-      type: "Full-time",
-      salary: "$70,000 - $90,000",
-      postedDate: "2 days ago",
-      description: "We are looking for a skilled Frontend Developer to join our team and build amazing user experiences...",
-      skills: ["React", "JavaScript", "CSS"],
-    },
-    {
-      id: "job-2",
-      title: "UX Designer",
-      company: "Design Studio",
+      id: "job1",
+      title: "Senior React Developer",
+      company: "TechCorp Inc.",
       location: "San Francisco, CA",
-      type: "Remote",
-      salary: "$60,000 - $80,000",
-      postedDate: "1 week ago",
-      description: "Join our creative team as a UX Designer and help shape user experiences that matter...",
-      skills: ["Figma", "Sketch", "User Research"],
-    },
-    {
-      id: "job-3",
-      title: "Full Stack Developer",
-      company: "StartupXYZ",
-      location: "Austin, TX",
+      salary: "$120k - $160k",
       type: "Full-time",
-      salary: "$80,000 - $100,000",
-      postedDate: "3 days ago",
-      description: "We need a versatile Full Stack Developer to work on exciting projects and scale our platform...",
-      skills: ["JavaScript", "Node.js", "MongoDB", "React"],
+      posted: "2 days ago",
+      description: "Join our innovative team building next-generation web applications using React, TypeScript, and modern development practices.",
+      skills: ["React", "TypeScript", "Redux", "Node.js", "GraphQL"],
+      featured: true
     },
     {
-      id: "job-4",
-      title: "Data Scientist",
-      company: "Analytics Inc",
-      location: "Boston, MA",
-      type: "Part-time",
-      salary: "$90,000 - $120,000",
-      postedDate: "5 days ago",
-      description: "Seeking a Data Scientist to extract insights from complex datasets and drive business decisions...",
-      skills: ["Python", "R", "Machine Learning", "SQL"],
-    },
-    {
-      id: "job-5",
-      title: "Product Manager",
-      company: "Innovation Labs",
-      location: "Seattle, WA",
-      type: "Full-time",
-      salary: "$100,000 - $130,000",
-      postedDate: "1 day ago",
-      description: "Lead product strategy and development in a fast-paced environment with cutting-edge technology...",
-      skills: ["Product Strategy", "Agile", "User Stories", "Roadmapping"],
-    },
-    {
-      id: "job-6",
-      title: "Backend Engineer",
-      company: "Cloud Solutions",
+      id: "job2",
+      title: "UX/UI Designer",
+      company: "DesignHub",
       location: "Remote",
+      salary: "$90k - $120k",
+      type: "Full-time",
+      posted: "1 week ago",
+      description: "Create beautiful, intuitive interfaces for web and mobile applications. Work with a collaborative team of designers and developers.",
+      skills: ["Figma", "Adobe XD", "User Research", "Prototyping", "UI Design"],
+      featured: true
+    },
+    {
+      id: "job3",
+      title: "DevOps Engineer",
+      company: "CloudSystems",
+      location: "Chicago, IL",
+      salary: "$110k - $140k",
+      type: "Full-time",
+      posted: "3 days ago",
+      description: "Manage our cloud infrastructure and CI/CD pipelines. Implement automation and ensure high availability of our services.",
+      skills: ["AWS", "Docker", "Kubernetes", "Terraform", "CI/CD"],
+      featured: true
+    },
+    {
+      id: "job4",
+      title: "Data Scientist",
+      company: "AnalyticsPro",
+      location: "Boston, MA",
+      salary: "$130k - $170k",
+      type: "Full-time",
+      posted: "Just now",
+      description: "Apply machine learning and statistical modeling to solve complex business problems. Work with large datasets and create actionable insights.",
+      skills: ["Python", "Machine Learning", "SQL", "Data Visualization", "Statistics"],
+      featured: false
+    },
+    {
+      id: "job5",
+      title: "Product Manager",
+      company: "InnovateCo",
+      location: "New York, NY",
+      salary: "$115k - $150k",
+      type: "Full-time",
+      posted: "2 weeks ago",
+      description: "Lead product development from conception to launch. Work with cross-functional teams to define product vision and roadmap.",
+      skills: ["Product Strategy", "Agile", "User Stories", "Market Research", "Roadmapping"],
+      featured: false
+    },
+    {
+      id: "job6",
+      title: "Backend Engineer",
+      company: "ServerStack",
+      location: "Seattle, WA",
+      salary: "$125k - $155k",
+      type: "Full-time",
+      posted: "3 days ago",
+      description: "Design and implement scalable backend services. Work with databases, APIs, and server-side technologies.",
+      skills: ["Java", "Spring Boot", "PostgreSQL", "RESTful APIs", "Microservices"],
+      featured: false
+    },
+    {
+      id: "job7",
+      title: "Frontend Developer",
+      company: "WebWorks",
+      location: "Austin, TX",
+      salary: "$90k - $120k",
       type: "Contract",
-      salary: "$85,000 - $110,000",
-      postedDate: "4 days ago",
-      description: "Build scalable backend systems and APIs that power millions of users worldwide...",
-      skills: ["Java", "Spring Boot", "AWS", "Microservices"],
+      posted: "1 week ago",
+      description: "Create responsive and interactive user interfaces using modern frontend technologies.",
+      skills: ["JavaScript", "React", "CSS", "HTML", "Responsive Design"],
+      featured: false
+    },
+    {
+      id: "job8",
+      title: "Mobile App Developer",
+      company: "AppGenius",
+      location: "Remote",
+      salary: "$100k - $130k",
+      type: "Part-time",
+      posted: "5 days ago",
+      description: "Develop native mobile applications for iOS and Android platforms. Focus on performance and user experience.",
+      skills: ["Swift", "Kotlin", "Mobile UI Design", "API Integration", "App Store Deployment"],
+      featured: false
     },
   ];
 
-  // Jobs are already filtered by the API based on search parameters
-  // No need for additional filtering with useMemo
+  // Filter jobs based on search parameters
+  const filteredJobs = useMemo(() => {
+    return mockJobs.filter(job => {
+      const matchesSearch = searchTerm ? (
+        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.company.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        job.description.toLowerCase().includes(searchTerm.toLowerCase())
+      ) : true;
+      
+      const matchesType = filterType !== 'all' ? 
+        job.type.toLowerCase() === filterType.toLowerCase() : true;
+      
+      const matchesLocation = filterLocation !== 'all' ? 
+        job.location.toLowerCase().includes(filterLocation.toLowerCase()) : true;
+      
+      return matchesSearch && matchesType && matchesLocation;
+    });
+  }, [searchTerm, filterType, filterLocation]);
+
+  const handleRetry = () => {
+    setError(null);
+    setIsLoading(false);
+  };
 
   return (
     <ErrorBoundary>
@@ -147,7 +174,7 @@ const ViewOpenings = () => {
             </span>
           ) : (
             <>
-              {jobs?.length || 0} Job{(jobs?.length || 0) !== 1 ? 's' : ''} Found
+              {filteredJobs.length} Job{filteredJobs.length !== 1 ? 's' : ''} Found
             </>
           )}
         </h2>
@@ -164,14 +191,14 @@ const ViewOpenings = () => {
             <Loader2 className="h-8 w-8 animate-spin text-job-primary" />
             <span className="ml-3 text-lg">Loading job opportunities...</span>
           </div>
-        ) : isError ? (
+        ) : error ? (
           <Alert variant="destructive" className="my-6">
             <AlertCircle className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>
-              {error instanceof Error ? error.message : 'Failed to load jobs'}
+              {error}
               <div className="mt-4">
-                <Button onClick={() => refetch()} variant="outline" size="sm">
+                <Button onClick={handleRetry} variant="outline" size="sm">
                   Try Again
                 </Button>
               </div>
@@ -180,12 +207,12 @@ const ViewOpenings = () => {
         ) : (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {jobs?.map((job) => (
+              {filteredJobs.map((job) => (
                 <JobListingCard key={job.id} job={job} />
               ))}
             </div>
 
-            {(jobs?.length || 0) === 0 && <NoJobsFound />}
+            {filteredJobs.length === 0 && <NoJobsFound />}
           </>
         )}
       </ErrorBoundary>

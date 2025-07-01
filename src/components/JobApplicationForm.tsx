@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { z } from 'zod';
 import { useZodForm, createSubmitHandler } from '@/lib/hooks/useZodForm';
@@ -6,7 +6,6 @@ import { useFormError } from '@/lib/hooks/useFormError';
 import { FormField } from './FormField';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
-import { useApplyToJob } from '@/lib/jobs-api';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
@@ -53,24 +52,30 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
   onCancel,
 }) => {
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   
-  // Use our custom hook for applying to jobs with React Query
-  const { mutate: applyToJob, isLoading } = useApplyToJob({
-    onSuccess: (data) => {
+  // Mock function for applying to jobs
+  const applyToJob = async (data: { jobId: string; application: any }) => {
+    setIsLoading(true);
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
       toast({
         title: 'Application Submitted',
-        description: data.message || 'Your application has been submitted successfully!',
+        description: 'Your application has been submitted successfully!',
       });
       if (onSuccess) onSuccess();
-    },
-    onError: (error) => {
+    } catch (error) {
       toast({
         title: 'Application Failed',
-        description: error.message || 'There was an error submitting your application. Please try again.',
+        description: 'There was an error submitting your application. Please try again.',
         variant: 'destructive',
       });
-    },
-  });
+    } finally {
+      setIsLoading(false);
+    }
+  };
   
   // Use our custom hook for form validation with Zod
   const form = useZodForm(applicationSchema, {

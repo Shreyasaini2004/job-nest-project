@@ -4,7 +4,7 @@ import AutoSizer from 'react-virtualized-auto-sizer';
 import { useVirtualizedList } from '@/lib/hooks/useVirtualizedList';
 import { Job } from '@/contexts/SavedJobsContext';
 import JobListingCard from './JobListingCard';
-import { SavedJob } from '@/lib/hooks/useSavedJobsQuery';
+import { Job as SavedJob } from '@/contexts/SavedJobsContext';
 import SavedJobCard from './SavedJobCard';
 
 type VirtualizedJobListProps = {
@@ -12,7 +12,7 @@ type VirtualizedJobListProps = {
   type: 'job-listing' | 'saved-job';
   className?: string;
   removeJob?: (jobId: string) => void;
-  toggleReminder?: (jobId: string, reminderSet: boolean, deadline?: Date, notes?: string) => void;
+  toggleReminder?: (jobId: string, deadline?: Date) => void;
 };
 
 /**
@@ -40,7 +40,7 @@ const VirtualizedJobList: React.FC<VirtualizedJobListProps> = ({
     } else if (type === 'saved-job' && removeJob && toggleReminder) {
       // Create adapter function to match SavedJobCard's expected signature
       const adaptedToggleReminder = (id: string, deadline?: Date) => {
-        toggleReminder(id, false, deadline, '');
+        toggleReminder(id, deadline);
       };
       
       return (
