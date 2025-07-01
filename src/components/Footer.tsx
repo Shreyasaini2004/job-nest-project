@@ -39,8 +39,11 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">For Job Seekers</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Browse Jobs</li>
-              <li>Resume ATS Score Calculator</li>
+              <li>View Openings</li>
+              <li>Saved Jobs & Reminders</li>
+              <li>Manage Applications</li>
+              <li>ATS Score Analysis</li>
+              <li>Saved Analyses</li>
             </ul>
           </div>
 
@@ -48,10 +51,10 @@ const Footer = () => {
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground">For Employers</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>Post Jobs</li>
-              <li>Browse Candidates</li>
-              <li>Hiring Solutions</li>
-              <li>Company Profiles</li>
+              <li>Post Openings</li>
+              <li>View Applications</li>
+              <li>View Status</li>
+              <li>Calendar & Events</li>
             </ul>
           </div>
         </div>
