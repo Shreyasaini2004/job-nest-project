@@ -1,4 +1,4 @@
-import { User, Briefcase, FileText, Bookmark, Bell } from "lucide-react";
+import { User, Briefcase, FileText, Bookmark, Bell, Target, History } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/sidebar";
 
 interface JobSeekerSidebarProps {
-  activeSection: 'update-details' | 'view-openings' | 'manage-applications' | 'saved-jobs';
-  onSectionChange: (section: 'update-details' | 'view-openings' | 'manage-applications' | 'saved-jobs') => void;
+  activeSection: 'update-details' | 'view-openings' | 'manage-applications' | 'saved-jobs' | 'ats-score' | 'saved-analyses';
+  onSectionChange: (section: 'update-details' | 'view-openings' | 'manage-applications' | 'saved-jobs' | 'ats-score' | 'saved-analyses') => void;
 }
 
 const JobSeekerSidebar = ({ activeSection, onSectionChange }: JobSeekerSidebarProps) => {
@@ -39,6 +39,16 @@ const JobSeekerSidebar = ({ activeSection, onSectionChange }: JobSeekerSidebarPr
       id: 'manage-applications' as const,
       label: 'Manage Applications',
       icon: FileText
+    },
+    {
+      id: 'ats-score' as const,
+      label: 'ATS Score Analysis',
+      icon: Target
+    },
+    {
+      id: 'saved-analyses' as const,
+      label: 'Saved Analyses',
+      icon: History
     },
   ];
 
