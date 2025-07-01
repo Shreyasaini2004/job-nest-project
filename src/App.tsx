@@ -13,6 +13,8 @@ import { EventProvider } from "./contexts/EventContext";
 import { SavedJobsProvider } from "./contexts/SavedJobsContext";
 import { ATSAnalysisProvider } from "./contexts/ATSAnalysisContext";
 import ErrorBoundary from "./components/ErrorBoundary";
+import ProfilePage from "./pages/Profile";
+import SettingsPage from "./pages/Settings";
 
 const App = () => (
   <ErrorBoundary>
@@ -30,6 +32,8 @@ const App = () => (
                   <Route path="/register" element={<Register />} />
                   <Route path="/dashboard" element={<JobSeekerDashboard />} />
                   <Route path="/employer-dashboard" element={<EmployerDashboard />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                  <Route path="/settings" element={<SettingsPage />} />
                   {/* Redirect old route to new one */}
                   <Route path="/job-seeker-dashboard" element={<Navigate to="/dashboard" replace />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

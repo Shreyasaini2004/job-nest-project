@@ -55,11 +55,11 @@ const JobSeekerHeader = () => {
             <DropdownMenuContent align="end" className="w-56 bg-background border border-border/50 shadow-lg">
               <DropdownMenuLabel className="font-semibold">Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-job-primary/5">
+              <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-job-primary/5" onClick={() => navigate('/profile')}>
                 <Eye className="h-4 w-4" />
                 <span>View Profile</span>
               </DropdownMenuItem>
-              <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-job-primary/5">
+              <DropdownMenuItem className="flex items-center space-x-2 cursor-pointer hover:bg-job-primary/5" onClick={() => navigate('/settings')}>
                 <Settings className="h-4 w-4" />
                 <span>Settings</span>
               </DropdownMenuItem>

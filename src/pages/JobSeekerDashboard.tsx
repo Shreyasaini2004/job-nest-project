@@ -5,7 +5,7 @@ import JobSeekerContent from "@/components/JobSeekerContents";
 import JobSeekerHeader from "@/components/JobSeekerHeader";
 
 const JobSeekerDashboard = () => {
-  const [activeSection, setActiveSection] = useState<'update-details' | 'view-openings' | 'manage-applications' | 'saved-jobs' | 'ats-score' | 'saved-analyses'>('update-details');
+  const [activeSection, setActiveSection] = useState<'view-openings' | 'update-details' | 'manage-applications' | 'saved-jobs' | 'ats-score' | 'saved-analyses'>('view-openings');
 
   return (
     <div className="min-h-screen bg-background">
