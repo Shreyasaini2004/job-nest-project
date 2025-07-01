@@ -10,8 +10,7 @@ export default function RegisterPage() {
   const navigate = useNavigate();
 
   const handleTabChange = (value: string) => {
-    // Don't allow tab switching
-    return;
+    navigate(`/register?type=${value}`);
   };
 
   return (
