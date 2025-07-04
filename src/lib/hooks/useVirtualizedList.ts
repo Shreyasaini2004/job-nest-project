@@ -121,6 +121,11 @@ export function useVirtualizedList<T>(
     };
   };
 
+  // Scroll to a specific item
+  const scrollToItem = (index: number, align: 'auto' | 'smart' | 'center' | 'end' | 'start' = 'smart') => {
+    listRef.current?.scrollToItem(index, align);
+  };
+
   return {
     // Props to pass to the VariableSizeList component
     listProps: {
@@ -133,9 +138,6 @@ export function useVirtualizedList<T>(
     // Utility functions
     createRowRenderer,
     getItemRef,
-    // Scroll to a specific item
-    scrollToItem: (index: number, align: 'auto' | 'smart' | 'center' | 'end' | 'start' = 'smart') => {
-      listRef.current?.scrollToItem(index, align);
-    },
+    scrollToItem,
   };
 }
