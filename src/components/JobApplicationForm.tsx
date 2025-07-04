@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { FormProvider } from 'react-hook-form';
 import { z } from 'zod';
@@ -5,7 +6,6 @@ import { useZodForm, createSubmitHandler } from '@/lib/hooks/useZodForm';
 import { useFormError } from '@/lib/hooks/useFormError';
 import { FormField } from './FormField';
 import { Button } from './ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2 } from 'lucide-react';
 
@@ -103,49 +103,46 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
   });
 
   return (
-    <Card className="w-full max-w-2xl mx-auto">
-      <CardHeader>
-        <CardTitle>Apply for {jobTitle}</CardTitle>
-        <CardDescription>Submit your application to {companyName}</CardDescription>
-      </CardHeader>
+    <div className="w-full space-y-6">
+      <div className="text-center pb-4">
+        <p className="text-muted-foreground">Submit your application to {companyName}</p>
+      </div>
       
       <FormProvider {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <CardContent className="space-y-4">
-            <FormField
-              name="coverLetter"
-              label="Cover Letter"
-              type="textarea"
-              placeholder="Introduce yourself and explain why you're a good fit for this position..."
-              rows={6}
-              required
-            />
-            
-            <FormField
-              name="resumeUrl"
-              label="Resume URL"
-              type="url"
-              placeholder="https://example.com/my-resume.pdf"
-              description="Link to your resume (Google Drive, Dropbox, etc.)"
-            />
-            
-            <FormField
-              name="portfolioUrl"
-              label="Portfolio URL"
-              type="url"
-              placeholder="https://myportfolio.com"
-              description="Link to your portfolio or personal website"
-            />
-            
-            <FormField
-              name="agreeToTerms"
-              type="checkbox"
-              checkboxLabel="I agree to the terms and conditions"
-              required
-            />
-          </CardContent>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <FormField
+            name="coverLetter"
+            label="Cover Letter"
+            type="textarea"
+            placeholder="Introduce yourself and explain why you're a good fit for this position..."
+            rows={6}
+            required
+          />
           
-          <CardFooter className="flex justify-between">
+          <FormField
+            name="resumeUrl"
+            label="Resume URL"
+            type="url"
+            placeholder="https://example.com/my-resume.pdf"
+            description="Link to your resume (Google Drive, Dropbox, etc.)"
+          />
+          
+          <FormField
+            name="portfolioUrl"
+            label="Portfolio URL"
+            type="url"
+            placeholder="https://myportfolio.com"
+            description="Link to your portfolio or personal website"
+          />
+          
+          <FormField
+            name="agreeToTerms"
+            type="checkbox"
+            checkboxLabel="I agree to the terms and conditions"
+            required
+          />
+          
+          <div className="flex justify-between pt-4">
             <Button type="button" variant="outline" onClick={onCancel} disabled={isLoading}>
               Cancel
             </Button>
@@ -159,10 +156,10 @@ const JobApplicationForm: React.FC<JobApplicationFormProps> = ({
                 'Submit Application'
               )}
             </Button>
-          </CardFooter>
+          </div>
         </form>
       </FormProvider>
-    </Card>
+    </div>
   );
 };
 
